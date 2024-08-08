@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+    <h2>Welcome, <%= session.getAttribute("user") %>!</h2>
+    <h3>Your Cases</h3>
+    <table border="1">
+        <tr>
+            <th>Case Number</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        <%
+            try {
+            	Class.forName("oracle.jdbc.driver.OracleDriver");
+            	Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","1234");
+                String sql = "SELECT * FROM cases WHERE user_id = ?";
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setInt(1, 1); // Assume user ID 1 for demonstration
+                ResultSet rs = stmt.executeQuery();
+
+                while (rs.next()) {
+        %>
+                    <tr>
+                        <td><%= rs.getString("case_number") %></td>
+                        <td><%= rs.getString("description") %></td>
+                        <td><%= rs.getString("status") %></td>
+                        <td>
+                            <a href="editCase.jsp?id=<%= rs.getInt("id") %>">Edit</a>
+                            <a href="DeleteCaseServlet?id=<%= rs.getInt("id") %>">Delete</a>
+                        </td>
+                    </tr>
+        <%
+                }
+
+                conn.close();
+            } catch (ClassNotFoundException | SQLException e) {
+                e.printStackTrace();
+            }
+        %>
+    </table>
+    <h3>Add New Case</h3>
+    <form action="AddCaseServlet" method="post">
+        <label for="caseNumber">Case Number:</label>
+        <input type="text" id="caseNumber" name="caseNumber" required><br><br>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea><br><br>
+        <label for="status">Status:</label>
+        <input type="text" id="status" name="status" required><br><br>
+        <input type="hidden" name="userId" value="1"> <!-- Assume user ID 1 for demonstration -->
+        <input type="submit" value="Add Case">
+    </form>
+</body>
+</html>

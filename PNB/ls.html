@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div id="main">
+        <div id="images">
+            <img src="./img/Logo.jpg" alt="" class="center">
+        </div>
+        <div id="yellow"></div>
+        <div id="wel">
+            <h6>Welcome to PNB Litigation Management System</h6>
+        </div>
+        <div id="log">
+            <div id="form">
+                <h6>User login</h6>
+                <form action="LoginServlet" method="post">
+                    <div class="form-group">
+                        <label for="employeeid">Employee ID:* </label>
+                        <input type="text" id="employeeid" name="employeeid" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:* </label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <input type="submit" value="Login">
+                </form>
+            </div>
+            <div id="lms">
+                <img src="./img/Litigation-Document-Management-Software-1.webp" alt="">
+            </div>
+        </div>
+    </div>
+    <footer>
+        <ul class="horizontal-list text-center">
+            <li><a href="#">@2024 Punjab National Bank</a></li>
+            <li><a href="#about">Terms and Conditions</a></li>
+            <li><a href="#skills">Privacy Policy</a></li>
+            <li><a href="#education">Disclaimer</a></li>
+            <li><a href="#portfolio">Security Information</a></li>
+            <li><a href="login.html">Trouble logging in</a></li>
+        </ul>
+    </footer>
+</body>
+</html>
